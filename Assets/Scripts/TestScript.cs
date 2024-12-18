@@ -1,6 +1,8 @@
 using MiniDungeon;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TestScript : MonoBehaviour
@@ -10,6 +12,28 @@ public class TestScript : MonoBehaviour
     {
         Debug.LogWarning("You must delete TestScript");
 
+        int[] arrayA = { 6, 2, 3, 4 };
+        int[] arrayB = { 6, 2, 3, 4 };
+
+        int[,] arrayBi;
+
+        arrayBi = new int[2,2];
+
+
+        arrayBi[1,1] = 69;
+
+        Debug.Log($"arrayBi[1,1]=>{arrayBi[1, 1]}, {arrayBi}");
+
+        if (Enumerable.SequenceEqual(arrayA, arrayB))
+        {
+            Debug.Log("They are equal");
+        }
+        else
+        {
+            Debug.Log("Not equal");
+        }
+
+        /*
         List<Cell> listA = new List<Cell>();
 
         listA.Add(new Cell(0, 0));
@@ -17,21 +41,22 @@ public class TestScript : MonoBehaviour
 
         //Debug.Log($"cell=>{listA[0]}");
 
-        /*
+        
         List<Cell> listB = new List<Cell>(listA.Count);
 
         listA.ForEach(cell => listB.Add(cell));
 
-        Debug.Log($"listA[0].GetCurrentDirection() => {listA[0].GetCurrentDirection()}");
-        Debug.Log($"listB[0].GetCurrentDirection() => {listB[0].GetCurrentDirection()}\n--- Change Direction ----");
-        listA[0].SetDirection(Direction.Down);
-        Debug.Log($"listA[0].GetCurrentDirection() => {listA[0].GetCurrentDirection()}");
-        Debug.Log($"listB[0].GetCurrentDirection() => {listB[0].GetCurrentDirection()}");
+        Debug.Log($"listA[0].GetInMaze() => {listA[0].GetInMaze()}");
+        Debug.Log($"listA[1].GetInMaze() => {listA[1].GetInMaze()}");
+        listB[0].SetInMaze();
+        Debug.Log($"listA[0].GetInMaze() => {listA[0].GetInMaze()}");
+        Debug.Log($"listA[1].GetInMaze() => {listA[1].GetInMaze()}");
 
 
-        listA.Clear();
+        listB.RemoveAt(1);
         Debug.Log($"ListB.count={listB.Count} // ListA.count={listA.Count}");
         */
+        
     }
 
     // Update is called once per frame
