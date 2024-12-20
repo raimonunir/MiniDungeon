@@ -2,6 +2,7 @@ using MiniDungeon;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -10,6 +11,15 @@ public class TestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        const string wall = "#";
+
+        string test1 = "abcd";
+        //Debug.LogWarning(test1.Substring(1, 1));
+
+        Debug.Log(wall+wall+wall);
+        Debug.Log("--");
+        Debug.Log("|  |");
+        Debug.Log("__");
         Debug.LogWarning("You must delete TestScript");
 
         int[] arrayA = { 6, 2, 3, 4 };

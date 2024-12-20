@@ -17,7 +17,7 @@ namespace MiniDungeon {
 
         private void Start()
         {
-            BuildMaze(2, 2);
+            BuildMaze(10, 10);
         }
 
         private void BuildMaze(int numberOfRows, int numberOfCols)
@@ -25,6 +25,8 @@ namespace MiniDungeon {
             maze = new Maze(numberOfRows, numberOfCols);
 
             Cell[,] generatedMazeCells = maze.GetMazeCells();
+
+            Debug.Log("============ Start Building ==============");
 
             // for each cell
             foreach (Cell cell in generatedMazeCells) {
@@ -34,8 +36,9 @@ namespace MiniDungeon {
                 BuildCellWalls(cell, cellCurrentGameObject);
             }
 
-            Debug.Log("Maze Generated!");
+            Debug.Log("Maze Created!");
 
+            
             //xxx maze to null for garbage collector
             //maze = null;
         }
@@ -46,7 +49,7 @@ namespace MiniDungeon {
             // calculate position based on size column and row
             float xSize = cellGameObject.GetComponent<CellGameObject>().GetSize().x;
             float zSize = cellGameObject.GetComponent <CellGameObject>().GetSize().z;
-            Vector3 position = new Vector3(cell.GetIdColumn() * xSize , 0f, cell.GetIdRow() * zSize);
+            Vector3 position = new Vector3(cell.GetIdCell().idColumn * xSize , 0f, cell.GetIdCell().idRow * zSize * -1);
             
             // instantiate
             return Instantiate(cellGameObject, position , Quaternion.Euler(0, 0, 0));
@@ -54,6 +57,9 @@ namespace MiniDungeon {
 
         private void BuildCellWalls(Cell cell, GameObject cellCurrentGameObject)
         {
+            Debug.Log($"cell=>{cell}, cell.GetHasNorthWall()=>{cell.GetHasNorthWall()}");
+            Debug.Log($"cellCurrentGameObject.transform.position=>{cellCurrentGameObject.transform.position}");
+            
             CellGameObject myCellGameObject = cellCurrentGameObject.GetComponent<CellGameObject>();
 
             if (cell.GetHasNorthWall() == false) { 
