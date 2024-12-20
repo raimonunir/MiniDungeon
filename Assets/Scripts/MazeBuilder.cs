@@ -1,12 +1,7 @@
 
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace MiniDungeon { 
     public class MazeBuilder : MonoBehaviour
@@ -14,10 +9,12 @@ namespace MiniDungeon {
         private Maze maze;
         Vector3 wallSize = new Vector3(5f, 4f, 0.5f);
         [SerializeField] private GameObject cellGameObject;
+        private GameObject emptyMazeParent;
 
         private void Start()
         {
-            BuildMaze(10, 10);
+            //BuildMaze(10, 10);
+            
         }
 
         private void BuildMaze(int numberOfRows, int numberOfCols)
@@ -27,6 +24,10 @@ namespace MiniDungeon {
             Cell[,] generatedMazeCells = maze.GetMazeCells();
 
             Debug.Log("============ Start Building ==============");
+
+            // instantiate empty maze parent
+            emptyMazeParent = new GameObject("EmptyMazeParent");
+            emptyMazeParent.transform.position = Vector3.zero;
 
             // for each cell
             foreach (Cell cell in generatedMazeCells) {
@@ -50,9 +51,9 @@ namespace MiniDungeon {
             float xSize = cellGameObject.GetComponent<CellGameObject>().GetSize().x;
             float zSize = cellGameObject.GetComponent <CellGameObject>().GetSize().z;
             Vector3 position = new Vector3(cell.GetIdCell().idColumn * xSize , 0f, cell.GetIdCell().idRow * zSize * -1);
-            
+
             // instantiate
-            return Instantiate(cellGameObject, position , Quaternion.Euler(0, 0, 0));
+            return Instantiate(cellGameObject, position, Quaternion.Euler(0, 0, 0), emptyMazeParent.transform);
         }
 
         private void BuildCellWalls(Cell cell, GameObject cellCurrentGameObject)
@@ -82,7 +83,12 @@ namespace MiniDungeon {
             throw new NotImplementedException();
         }
 
-       
+       public void BuildNewMaze()
+        {
+            Destroy(emptyMazeParent);
+            BuildMaze(10, 14);
+            
+        }
 
 
     }// class

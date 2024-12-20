@@ -398,9 +398,9 @@ namespace MiniDungeon
             string topRowLine = "";
             string midRowLine = "";
             string bottomRowLine = "";
-            for (int row = 0; row < cellMazeMatrix.GetLength(0); row++)
+            for (int row = 0; row < numberOfRows; row++)
             {
-                for (int col = 0; col < cellMazeMatrix.GetLength(1); col++)
+                for (int col = 0; col < numberOfColumns; col++)
                 {
                     Cell cellToPrint = cellMazeMatrix[col, row];
                     CellMazeDirection direction = cellToPrint.GetCurrentCellMazeDirection();
@@ -505,9 +505,9 @@ namespace MiniDungeon
                     "\n" + blankLine +
                     "\n|C|R| D |N|E|W|S|");
 
-                for (int row = 0; row < cellMazeMatrix.GetLength(0); row++)
+                for (int row = 0; row < numberOfRows; row++)
                 {
-                    for (int col = 0; col < cellMazeMatrix.GetLength(1); col++)
+                    for (int col = 0; col < numberOfColumns; col++)
                     {
                         Cell cell = cellMazeMatrix[col, row];
                         outputFile.WriteLine(blankLine);
